@@ -1,0 +1,101 @@
+/* step design starts */
+
+.steps-flow {
+  padding-left: 30px;
+  position: relative;
+}
+
+.steps-flow:before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  top: 0;
+  left: 9px;
+  background-color: lavender;
+}
+
+.steps-flow .step {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.steps-flow .step + .step {
+  padding-top: 15px;
+  margin-top: 15px;
+  border-top: 1px solid lavender;
+}
+
+.steps-flow .step > span {
+  flex-basis: 70px;
+  min-width: 0;
+  height: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  position: relative;
+  background-color: lavender;
+  color: blue;
+  padding: 2px 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.steps-flow .step > span::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 25px;
+  background-color: blue;
+  clip-path: polygon(100% 75%, 50% 100%, 0 75%, 0 0, 50% 25%, 100% 0);
+  left: -30px;
+  top: 0;
+}
+
+.steps-flow .step > .content {
+  min-width: 0;
+  flex-basis: 100%;
+  border-radius: 5px;
+}
+
+.steps-flow .step .content > *:last-child {
+  margin-bottom: 0;
+}
+
+.steps-flow .step > .content .title {
+  font-size: 20px;
+  color: blue;
+  font-weight: 700;
+}
+
+@media (max-width: 991px) {
+  [class*="col-lg"]:has(.steps-flow) + [class*="col-lg"] .steps-flow {
+    padding-top: 15px;
+  }
+
+  [class*="col-lg"]:has(.steps-flow)
+    + [class*="col-lg"]:has(.steps-flow)
+    .step:first-child {
+    padding-top: 15px;
+    border-top: 1px solid lavender;
+  }
+}
+
+@media (max-width: 767px) {
+  [class*="col-lg"]:has(.steps-flow) + [class*="col-lg"] .steps-flow {
+    padding-top: 15px;
+  }
+
+  [class*="col-sm"]:has(.steps-flow)
+    + [class*="col-lg"]:has(.steps-flow)
+    .step:first-child {
+    padding-top: 15px;
+    border-top: 1px solid lavender;
+  }
+}
+
+/* step design ends */
