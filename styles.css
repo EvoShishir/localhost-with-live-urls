@@ -1,101 +1,131 @@
-/* step design starts */
+/* jobs overview design starts */
 
-.steps-flow {
-  padding-left: 30px;
-  position: relative;
+.jobs-overview > div:first-child {
+  background-color: #1d3849;
+  padding: 20px;
 }
 
-.steps-flow:before {
-  content: "";
-  position: absolute;
-  width: 2px;
-  height: 100%;
-  top: 0;
-  left: 9px;
-  background-color: lavender;
-}
-
-.steps-flow .step {
+.jobs-overview > div:first-child {
   display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.steps-flow .step + .step {
-  padding-top: 15px;
-  margin-top: 15px;
-  border-top: 1px solid lavender;
-}
-
-.steps-flow .step > span {
-  flex-basis: 70px;
-  min-width: 0;
-  height: 25px;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  position: relative;
-  background-color: lavender;
-  color: blue;
-  padding: 2px 10px;
-  border-radius: 5px;
-  margin-bottom: 5px;
 }
 
-.steps-flow .step > span::before {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 25px;
-  background-color: blue;
-  clip-path: polygon(100% 75%, 50% 100%, 0 75%, 0 0, 50% 25%, 100% 0);
-  left: -30px;
-  top: 0;
+.jobs-overview > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.steps-flow .step > .content {
-  min-width: 0;
-  flex-basis: 100%;
-  border-radius: 5px;
-}
-
-.steps-flow .step .content > *:last-child {
+.jobs-overview > div:first-child h1 {
+  color: #fff;
+  text-align: center;
   margin-bottom: 0;
 }
 
-.steps-flow .step > .content .title {
+.jobs-overview > div:first-child h1 span:first-child {
+  color: #eab727;
+  font-size: 50px;
+}
+
+.jobs-overview > div:first-child h1 span:nth-child(2) {
+  font-size: 50px;
+}
+
+.jobs-overview > div:first-child h1 span:last-child {
   font-size: 20px;
-  color: blue;
+}
+
+.jobs-overview > div:nth-child(2) {
+  position: relative;
+  background-color: #adddf4;
+  padding: 20px;
+}
+
+.jobs-overview > div:nth-child(2) img {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  top: -25px;
+  right: -25px;
+}
+
+.jobs-overview > div:nth-child(2) > div {
+  color: #1d3849;
+  text-align: center;
   font-weight: 700;
 }
 
+.jobs-overview > div:nth-child(2) > div:first-child {
+  font-size: 50px;
+}
+
+.jobs-overview > div:nth-child(2) > div:last-child {
+  font-size: 20px;
+}
+
+.jobs-overview > div:last-child > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jobs-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "one img" "two img";
+}
+.jobs-overview > div:first-child {
+  grid-area: one;
+}
+.jobs-overview > div:nth-child(2) {
+  grid-area: two;
+}
+.jobs-overview > div:last-child {
+  grid-area: img;
+}
+
+@media (min-width: 768px) {
+  .jobs-overview > div:nth-child(2) img {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    top: -40px;
+    right: -40px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .jobs-overview > div:nth-child(2) img {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: -50px;
+    right: -50px;
+  }
+}
+
 @media (max-width: 991px) {
-  [class*="col-lg"]:has(.steps-flow) + [class*="col-lg"] .steps-flow {
-    padding-top: 15px;
+  .jobs-overview {
+    grid-template-columns: 3fr 2fr;
   }
 
-  [class*="col-lg"]:has(.steps-flow)
-    + [class*="col-lg"]:has(.steps-flow)
-    .step:first-child {
-    padding-top: 15px;
-    border-top: 1px solid lavender;
-  }
-}
-
-@media (max-width: 767px) {
-  [class*="col-lg"]:has(.steps-flow) + [class*="col-lg"] .steps-flow {
-    padding-top: 15px;
+  .jobs-overview > div:first-child,
+  .jobs-overview > div:nth-child(2) {
+    padding: 10px;
   }
 
-  [class*="col-sm"]:has(.steps-flow)
-    + [class*="col-lg"]:has(.steps-flow)
-    .step:first-child {
-    padding-top: 15px;
-    border-top: 1px solid lavender;
+  .jobs-overview > div:first-child h1 span:first-child,
+  .jobs-overview > div:first-child h1 span:nth-child(2),
+  .jobs-overview > div:nth-child(2) > div:first-child {
+    font-size: 26px;
+    font-weight: 700;
+  }
+  .jobs-overview > div:first-child h1 span:last-child,
+  .jobs-overview > div:nth-child(2) > div:last-child {
+    font-size: 14px;
   }
 }
 
-/* step design ends */
+/* jobs overview design ends */
