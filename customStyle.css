@@ -15,16 +15,15 @@
 
 .icon-box .img-box {
   position: relative;
-  margin-bottom: 40px;
-}
-
-.icon-box .img-box .icon {
-  background-color: white;
-  padding: 10px;
-  width: 60px;
-  border-radius: 50%;
-  position: absolute;
-  left: 50%;
-  bottom: -60px;
-  transform: translate(-50%, -50%);
+  margin-bottom: 40px !important;
+  .icon {
+    background-color: white;
+    padding: 10px;
+    width: 60px;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    bottom: -60px;
+    transform: translate(-50%, -50%);
+  }
 }
