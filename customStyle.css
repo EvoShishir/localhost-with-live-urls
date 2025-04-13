@@ -1,29 +1,30 @@
-.icon-box {
-  height: 100%;
-  background-color: var(--site-primary-color);
-  color: #e4e4e4;
-  border-radius: 10px;
-  padding: 8px;
-  a {
-    color: #e4e4e4;
-    text-decoration: underline;
-  }
-  .content {
-    padding: 0px 10px;
-  }
+.card-16 {
+  position: relative;
 }
 
-.icon-box .img-box {
+.card-16-thumb {
+  padding: 5px;
+  border: 2px solid #bae7eb;
+  border-radius: 10px;
+}
+
+.card-16-thumb img {
+  border-radius: 5px;
+}
+
+.card-16-body {
+  background-color: #bae7eb;
+  padding: 15px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  margin-top: -30px;
   position: relative;
-  margin-bottom: 40px !important;
-  .icon {
-    background-color: white;
-    padding: 10px;
-    width: 60px;
-    border-radius: 50%;
-    position: absolute;
-    left: 50%;
-    bottom: -60px;
-    transform: translate(-50%, -50%);
-  }
+  z-index: 1;
+  text-align: center;
+}
+
+.card-16-body .card-16-title {
+  font-weight: 700;
 }
