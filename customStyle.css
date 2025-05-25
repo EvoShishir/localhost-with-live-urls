@@ -1,0 +1,37 @@
+/* Card 13 css */
+
+@media(min-width: 668px) {
+    .card-13 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px
+    }
+}
+
+.card-13-body {
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 400ms
+}
+
+.card-13-body:hover,
+.card-13-body:first-child {
+    background-color: #e2dcff;
+    border-radius: 10px;
+    padding: 20px
+}
+
+.card-13:hover .card-13-body:first-child:not(:hover):has(~ .card-13-body:hover),
+.card-13:hover .card-13-body:first-child:has(+ .card-13-body:hover) {
+    background-color: initial;
+    color: initial;
+}
+
+.card-13-body .icon {
+    width: 80px;
+    background-color: #e2dcff;
+    border-radius: 50%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 8px solid rgb(255 255 255)
+}
