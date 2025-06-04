@@ -39,6 +39,11 @@
             xhttp.send();
             document.getElementById("autocomplete").value = domain;
 
+            title = domain.replace(/^https?:\/\//, "");
+            title = title.replace(/\.\w+$/, "");
+
+            document.title = title.charAt(0).toUpperCase() + title.slice(1);
+
             return;
           }
         }
@@ -64,6 +69,11 @@
           anchor.href = domain + anchor.getAttribute("href");
           anchor.target = "_blank";
         });
+
+        const favicon = document.querySelector('link[rel="shortcut icon"]');
+        if (favicon) {
+          favicon.href = domain + "/images/favicon.ico";
+        }
       }
 
       window.addEventListener("beforeunload", function () {
@@ -161,6 +171,8 @@
       }
     </script>
 
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
     <!-- Stylesheets imports -->
     <link
       rel="stylesheet"
@@ -191,11 +203,36 @@
         top: 0;
         padding-top: 10px;
         z-index: 999;
-        background-color: white;
+        background-color: rgb(44, 44, 44);
         box-shadow: 0 1px 10px -5px black;
+        color: white;
       }
       .inner-class {
         cursor: pointer;
+      }
+      .class-btn {
+        padding: 8px;
+        border-radius: 20px !important;
+        background-color: rgb(141, 109, 70);
+        border: none !important;
+        font-weight: 500;
+      }
+      input {
+        padding: 8px;
+        border-radius: 20px !important;
+        border: none;
+        font-size: 20px;
+      }
+      .style-btn {
+        color: white !important;
+        font-weight: 700;
+        background-color: rgb(69, 69, 166);
+        padding: 10px;
+        border-radius: 20px !important;
+        border: none;
+      }
+      .style-btn:hover {
+        color: white;
       }
     </style>
   </head>
@@ -210,7 +247,7 @@
       </form>
       <div class="mt-3 d-flex justify-content-center align-items-center">
         <div class="d-flex align-items-center" id="domain-classes"></div>
-        <a id="styles-link" target="_blank">Styles</a>
+        <a id="styles-link" class="style-btn" target="_blank">Styles</a>
       </div>
       <hr class="mt-3" />
     </div>
@@ -235,7 +272,7 @@
         if (domainClasses.hasOwnProperty(key)) {
           const line = document.createElement("div");
           line.className =
-            "mr-3 border border-primary rounded px-3 inner-class";
+            "mr-3 border class-btn border-primary rounded px-3 inner-class";
           line.onclick = copyToClipboard;
           line.textContent = `${
             Array.isArray(domainClasses[key])
