@@ -52,6 +52,30 @@
       function updateImageSources(container) {
         const images = container.querySelectorAll("img[src^='/']");
         images.forEach((img) => {
+          // Create spinner
+          const spinner = document.createElement("div");
+          spinner.className = "spinner-border text-primary";
+          spinner.role = "status";
+          spinner.style.width = "2rem";
+          spinner.style.height = "2rem";
+
+          // Hide image initially
+          img.style.display = "none";
+
+          // Insert spinner before image
+          img.parentNode.insertBefore(spinner, img);
+
+          // Update image source
+          img.onload = () => {
+            spinner.remove();
+            img.style.display = "";
+          };
+
+          img.onerror = () => {
+            spinner.remove();
+            img.style.display = ""; // optional: or show a fallback
+          };
+
           img.src = domain + img.getAttribute("src");
         });
       }
@@ -242,14 +266,12 @@
       <form
         onsubmit="updateDomain(document.getElementById('autocomplete').value); return false;"
       >
-        <label for="autocomplete">Enter Domain: </label>
         <input id="autocomplete" style="width: 20em" />
       </form>
-      <div class="mt-3 d-flex justify-content-center align-items-center">
+      <div class="py-3 d-flex justify-content-center align-items-center">
         <div class="d-flex align-items-center" id="domain-classes"></div>
         <a id="styles-link" class="style-btn" target="_blank">Styles</a>
       </div>
-      <hr class="mt-3" />
     </div>
 
     <div w3-include-html="index.html"></div>
