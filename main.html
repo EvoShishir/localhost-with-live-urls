@@ -52,31 +52,22 @@
       function updateImageSources(container) {
         const images = container.querySelectorAll("img[src^='/']");
         images.forEach((img) => {
-          // Create custom loader
           const loader = document.createElement("div");
           loader.innerHTML = ` 
             <svg viewBox="25 25 50 50">
               <circle r="20" cy="50" cx="50"></circle>
             </svg>
           `;
-
-          // Hide image initially
           img.style.display = "none";
-
-          // Insert loader before image
           img.parentNode.insertBefore(loader, img);
-
-          // Set image load behavior
           img.onload = () => {
             loader.remove();
             img.style.display = "";
           };
-
           img.onerror = () => {
             loader.remove();
-            img.style.display = ""; // or keep hidden if you want
+            img.style.display = "";
           };
-
           img.src = domain + img.getAttribute("src");
         });
       }
