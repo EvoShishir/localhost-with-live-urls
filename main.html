@@ -54,7 +54,7 @@
         images.forEach((img) => {
           const loader = document.createElement("div");
           loader.className =
-            "d-flex justify-content-center align-items-center py-5";
+            "d-flex justify-content-center align-items-center py-5 loader";
           loader.innerHTML = ` 
             <svg viewBox="25 25 50 50">
               <circle r="20" cy="50" cx="50"></circle>
@@ -219,11 +219,15 @@
       .header {
         position: sticky;
         top: 0;
-        padding-top: 10px;
         z-index: 999;
         background-color: rgb(44, 44, 44);
         box-shadow: 0 1px 10px -5px black;
         color: white;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
       }
       .inner-class {
         cursor: pointer;
@@ -235,7 +239,7 @@
         border: none !important;
         font-weight: 500;
       }
-      input {
+      #autocomplete {
         padding: 8px;
         border-radius: 20px !important;
         border: none;
@@ -254,12 +258,12 @@
       }
 
       /* Loader starts */
-      svg {
+      .loader svg {
         width: 40px;
         transform-origin: center;
         animation: rotate4 2s linear infinite;
       }
-      circle {
+      .loader circle {
         fill: none;
         stroke: hsl(214, 97%, 59%);
         stroke-width: 5;
@@ -297,7 +301,7 @@
       >
         <input id="autocomplete" style="width: 20em" />
       </form>
-      <div class="py-3 d-flex justify-content-center align-items-center">
+      <div class="d-flex justify-content-center align-items-center">
         <div class="d-flex align-items-center" id="domain-classes"></div>
         <a id="styles-link" class="style-btn" target="_blank">Styles</a>
       </div>
