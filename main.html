@@ -223,11 +223,14 @@
         background-color: rgb(44, 44, 44);
         box-shadow: 0 1px 10px -5px black;
         color: white;
+        padding: 10px;
+      }
+      .header-container {
         display: flex;
         flex-direction: row-reverse;
         align-items: center;
-        justify-content: space-between;
-        padding: 10px;
+        justify-content: center;
+        gap: 5px;
       }
       .buttons-container {
         display: flex;
@@ -305,14 +308,16 @@
 
   <body>
     <div class="text-center top_header">
-      <form
-        onsubmit="updateDomain(document.getElementById('autocomplete').value); return false;"
-      >
-        <input id="autocomplete" style="width: 20em" />
-      </form>
-      <div class="buttons-container">
-        <div class="cls-buttons" id="domain-classes"></div>
-        <a id="styles-link" class="style-btn" target="_blank">Styles</a>
+      <div class="header-container">
+        <form
+          onsubmit="updateDomain(document.getElementById('autocomplete').value); return false;"
+        >
+          <input id="autocomplete" style="width: 20em" />
+        </form>
+        <div class="buttons-container">
+          <div class="cls-buttons" id="domain-classes"></div>
+          <a id="styles-link" class="style-btn" target="_blank">Styles</a>
+        </div>
       </div>
     </div>
 
