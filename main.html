@@ -227,14 +227,12 @@
       }
       .header-container {
         display: flex;
-        flex-direction: row-reverse;
         align-items: center;
         justify-content: center;
         gap: 5px;
       }
       .buttons-container {
         display: flex;
-        gap: 5px;
       }
       .inner-class {
         cursor: pointer;
@@ -341,7 +339,7 @@
         if (domainClasses.hasOwnProperty(key)) {
           const line = document.createElement("div");
           line.className =
-            "mr-3 border class-btn border-primary rounded px-3 inner-class";
+            "border class-btn border-primary rounded px-3 inner-class";
           line.onclick = copyToClipboard;
           line.textContent = `${
             Array.isArray(domainClasses[key])
