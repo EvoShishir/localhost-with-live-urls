@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Local Page Viewer</title>
 
+    <!-- Stylesheet imports -->
     <link
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.13.3/themes/smoothness/jquery-ui.css"
@@ -14,6 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 
     <style>
       * {
@@ -66,53 +68,6 @@
         z-index: -1;
       }
 
-      .floating-orbs {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        z-index: -1;
-        pointer-events: none;
-      }
-
-      .orb {
-        position: absolute;
-        border-radius: 50%;
-        background: linear-gradient(45deg, #348c40, #10b981);
-        opacity: 0.1;
-        animation: float 15s infinite linear;
-      }
-
-      .orb:nth-child(1) {
-        width: 100px;
-        height: 100px;
-        left: 10%;
-        animation-delay: 0s;
-      }
-      .orb:nth-child(2) {
-        width: 60px;
-        height: 60px;
-        left: 80%;
-        animation-delay: -5s;
-      }
-      .orb:nth-child(3) {
-        width: 80px;
-        height: 80px;
-        left: 50%;
-        animation-delay: -10s;
-      }
-
-      @keyframes float {
-        0% {
-          transform: translateY(100vh) rotate(0deg);
-        }
-        100% {
-          transform: translateY(-100px) rotate(360deg);
-        }
-      }
-
       /* Header Styles */
       .nav-head {
         position: sticky;
@@ -120,7 +75,6 @@
         z-index: 1000;
         backdrop-filter: blur(20px);
         background: var(--glass-bg);
-
         box-shadow: var(--shadow-lg);
       }
 
@@ -159,11 +113,11 @@
       .search-container {
         position: relative;
         flex: 1;
-        max-width: 400px;
+        max-width: 350px;
       }
 
       #autocomplete-input {
-        width: 340px;
+        width: 350px;
         padding: 5px 15px;
         background: var(--surface-color);
         border: 2px solid var(--border-color);
@@ -175,7 +129,7 @@
 
       #autocomplete-input:focus {
         outline: none;
-        border-color: var(#348c40);
+        border-color: #348c40;
         box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
         background: var(--surface-light);
       }
@@ -243,12 +197,12 @@
 
       .btns-secondary {
         background: var(--surface-color);
-        color: var(#10b981);
-        border: 2px solid var(#10b981);
+        color: #10b981;
+        border: 2px solid #10b981;
       }
 
       .btns-secondary:hover {
-        background: var(#10b981);
+        background: #10b981;
         color: white;
         transform: translateY(-2px);
       }
@@ -270,6 +224,8 @@
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .class-pill::before {
@@ -279,7 +235,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg, var(#10b981), var(#348c40));
+        background: linear-gradient(135deg, #10b981, #348c40);
         opacity: 0;
         transition: opacity 0.3s ease;
         border-radius: inherit;
@@ -287,7 +243,7 @@
 
       .class-pill:hover {
         transform: translateY(-1px);
-        border-color: var(#10b981);
+        border-color: #10b981;
         color: white;
       }
 
@@ -312,45 +268,40 @@
         margin: 0 auto;
       }
 
-      .content-card {
-        background: var(--glass-bg);
-        backdrop-filter: blur(20px);
-        border: 1px solid var(--border-color);
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: var(--shadow-lg);
-        min-height: 400px;
-        transition: all 0.3s ease;
-      }
-
-      .content-card:hover {
-        box-shadow: 0 35px 70px -12px rgba(0, 0, 0, 0.35);
-      }
-
-      .loading {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 300px;
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .spinner {
+      /* Image Loader */
+      .loader svg {
         width: 40px;
-        height: 40px;
-        border: 3px solid var(--border-color);
-        border-top: 3px solid var(#348c40);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
+        transform-origin: center;
+        animation: rotate4 2s linear infinite;
       }
 
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
+      .loader circle {
+        fill: none;
+        stroke: hsl(214, 97%, 59%);
+        stroke-width: 5;
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        animation: dash4 1.5s ease-in-out infinite;
+      }
+
+      @keyframes rotate4 {
         100% {
           transform: rotate(360deg);
+        }
+      }
+
+      @keyframes dash4 {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 90, 200;
+          stroke-dashoffset: -35px;
+        }
+        100% {
+          stroke-dashoffset: -125px;
         }
       }
 
@@ -388,16 +339,17 @@
         color: var(--text-secondary);
         border: none;
         cursor: pointer;
-        transition: background 0.2s ease;
+        transition: all 0.2s ease;
         border-radius: 8px;
         margin: 0.25rem;
       }
 
       .ui-menu-item .ui-menu-item-wrapper:hover,
       .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
-        background: linear-gradient(135deg, var(#348c40), var(#786a21));
-        color: black;
+        background: linear-gradient(135deg, #348c40, #786a21);
+        color: white;
         margin: 0.25rem;
+        transform: translateX(4px);
       }
 
       /* Responsive Design */
@@ -424,21 +376,6 @@
         main {
           padding: 1rem;
         }
-
-        .content-card {
-          padding: 1rem;
-        }
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
       }
 
       /* Toast Notification */
@@ -446,7 +383,7 @@
         position: fixed;
         bottom: 2rem;
         right: 2rem;
-        background: var(#10b981);
+        background: #10b981;
         color: white;
         padding: 1rem 1.5rem;
         border-radius: 12px;
@@ -465,23 +402,17 @@
   </head>
 
   <body>
-    <div class="floating-orbs">
-      <div class="orb"></div>
-      <div class="orb"></div>
-      <div class="orb"></div>
-    </div>
-
     <div class="nav-head">
       <div class="nav-container">
+        <form id="domain-form">
+          <div class="search-container">
+            <input
+              id="autocomplete-input"
+              placeholder="Enter or select a domain..."
+            />
+          </div>
+        </form>
         <div class="nav-items">
-          <form id="domain-form">
-            <div class="search-container">
-              <input
-                id="autocomplete-input"
-                placeholder="Enter or select a domain..."
-              />
-            </div>
-          </form>
           <div class="class-pills" id="domain-classes-container">
             <a id="styles-link" class="btns btns-primary" target="_blank">
               <i class="fas fa-palette"></i>
@@ -493,12 +424,7 @@
     </div>
 
     <main>
-      <div w3-include-html="index.html">
-        <div class="loading">
-          <div class="spinner"></div>
-          <p>Loading content...</p>
-        </div>
-      </div>
+      <div w3-include-html="index.html"></div>
     </main>
 
     <div id="toast" class="toast"></div>
@@ -542,7 +468,6 @@
             .writeText(textToCopy)
             .then(() => {
               showToast("Copied to clipboard!");
-              // Add a visual feedback
               target.style.transform = "scale(0.95)";
               setTimeout(() => {
                 target.style.transform = "";
@@ -556,8 +481,29 @@
 
         function updateImageSources(container) {
           container.querySelectorAll("img[src^='/']").forEach((img) => {
+            const loader = document.createElement("div");
+            loader.className =
+              "d-flex justify-content-center align-items-center py-5 loader";
+            loader.innerHTML = `
+              <svg viewBox="25 25 50 50">
+                <circle r="20" cy="50" cx="50"></circle>
+              </svg>
+            `;
+            img.style.display = "none";
+            img.parentNode.insertBefore(loader, img);
+            img.onload = () => {
+              loader.remove();
+              img.style.display = "";
+            };
+            img.onerror = () => {
+              loader.remove();
+              img.style.display = "";
+            };
             img.src = domain + img.getAttribute("src");
           });
+        }
+
+        function updatePictureSrcset(container) {
           container
             .querySelectorAll("source[srcset^='/']")
             .forEach((source) => {
@@ -570,6 +516,11 @@
             anchor.href = domain + anchor.getAttribute("href");
             anchor.target = "_blank";
           });
+
+          const favicon = document.querySelector('link[rel="shortcut icon"]');
+          if (favicon) {
+            favicon.href = domain + "/images/favicon.ico";
+          }
         }
 
         function renderDynamicUI() {
@@ -582,7 +533,7 @@
 
           const keysToShow = [
             "bgColor",
-            "btnsClasses",
+            "btnClasses",
             "commonSecClass",
             "heading_class",
             "imgBox",
@@ -609,20 +560,17 @@
           document.getElementById("styles-link").href =
             domain + "/inc/style.css";
           domainInput.value = domain;
+
+          // Update document title
+          let title = domain.replace(/^https?:\/\//, "");
+          title = title.replace(/\.\w+$/, "");
+          document.title = title.charAt(0).toUpperCase() + title.slice(1);
         }
 
         async function loadAndProcessContent() {
           const fileToInclude =
             contentContainer.getAttribute("w3-include-html");
           if (!fileToInclude) return;
-
-          // Show loading state
-          contentContainer.innerHTML = `
-            <div class="loading">
-              <div class="spinner"></div>
-              <p>Loading content...</p>
-            </div>
-          `;
 
           try {
             const response = await fetch(fileToInclude);
@@ -633,6 +581,7 @@
             contentContainer.innerHTML = content;
 
             updateImageSources(contentContainer);
+            updatePictureSrcset(contentContainer);
             updateAnchorSources(contentContainer);
 
             showToast("Content loaded successfully!");
@@ -763,21 +712,23 @@
         }
 
         init();
-      });
 
-      // FAQ/Details functionality
-      document.querySelectorAll(".details-block").forEach((targetFaqBlock) => {
-        const details = targetFaqBlock.querySelectorAll("details");
+        // FAQ/Details functionality
+        document
+          .querySelectorAll(".details-block")
+          .forEach((targetFaqBlock) => {
+            const details = targetFaqBlock.querySelectorAll("details");
 
-        details.forEach((targetDetail) => {
-          targetDetail.addEventListener("click", () => {
-            details.forEach((detail) => {
-              if (detail !== targetDetail) {
-                detail.removeAttribute("open");
-              }
+            details.forEach((targetDetail) => {
+              targetDetail.addEventListener("click", () => {
+                details.forEach((detail) => {
+                  if (detail !== targetDetail) {
+                    detail.removeAttribute("open");
+                  }
+                });
+              });
             });
           });
-        });
       });
     </script>
   </body>
