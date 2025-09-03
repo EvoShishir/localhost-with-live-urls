@@ -46,60 +46,24 @@
         position: relative;
       }
 
-      /* Animated background */
-      body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(
-            circle at 25% 25%,
-            rgba(99, 102, 241, 0.1) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 75% 75%,
-            rgba(16, 185, 129, 0.1) 0%,
-            transparent 50%
-          );
-        pointer-events: none;
-        z-index: -1;
-      }
-
       /* Header Styles */
       .nav-head {
         position: sticky;
         top: 0;
         z-index: 1000;
-        backdrop-filter: blur(20px);
+        backdrop-filter: blur(5px);
         background: var(--glass-bg);
         box-shadow: var(--shadow-lg);
+        font-size: 13px;
       }
 
       .nav-container {
-        max-width: 1200px;
-        padding-right: 30px;
-        padding-left: 30px;
+        max-width: 1250px;
         margin: 0 auto;
         padding: 1rem 2rem;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        gap: 2rem;
-      }
-
-      .logo {
-        font-size: 2rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #2c0349a1, #861b697c);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
       }
 
       .nav-items {
@@ -138,21 +102,11 @@
         color: var(--text-muted);
       }
 
-      .search-icon {
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--text-muted);
-        font-size: 1rem;
-        pointer-events: none;
-      }
-
       /* Modern Buttons */
       .btns {
         position: relative;
         padding: 0.75rem 1.5rem;
-        border-radius: 10px;
+        border-radius: 20px;
         font-weight: 600;
         border: none;
         cursor: pointer;
@@ -217,7 +171,7 @@
 
       .class-pill {
         padding: 0.5rem 1rem;
-        background: rgb(147 147 147 / 48%);
+        background: rgba(147, 147, 147, 0.48);
         border-radius: 20px;
         color: white;
         cursor: pointer;
@@ -258,14 +212,6 @@
 
       .class-pill:active {
         transform: scale(0.95);
-      }
-
-      /* Main Content */
-      main {
-        min-height: calc(100vh - 100px);
-        padding: 2rem;
-        max-width: 1400px;
-        margin: 0 auto;
       }
 
       /* Image Loader */
@@ -679,18 +625,40 @@
         }
 
         // Event Listeners
-        domainForm.addEventListener("submit", (event) => {
+        domainForm.addEventListener("submit", async (event) => {
           event.preventDefault();
-          const inputValue = domainInput.value;
-          const originalDomain = siteDomainMap.get(inputValue);
-          if (originalDomain) {
-            handleDomainUpdate(inputValue, originalDomain);
-          } else {
-            showToast(
-              "Domain not found. Please select a valid domain from the list.",
-              "error"
-            );
+          const inputValue = domainInput.value.trim();
+          let newDomainUrl = inputValue;
+
+          if (!newDomainUrl.startsWith("http")) {
+            newDomainUrl = "https://" + newDomainUrl;
           }
+
+          domain = newDomainUrl;
+          localStorage.setItem("domain", domain);
+
+          const originalDomain = siteDomainMap.get(inputValue);
+
+          if (originalDomain) {
+            // Fetch classes from backend for known domains
+            try {
+              domainClasses = await fetchWebsiteClasses(originalDomain);
+              localStorage.setItem(
+                "domainClasses",
+                JSON.stringify(domainClasses)
+              );
+            } catch {
+              domainClasses = {};
+            }
+          } else {
+            // Allow unknown domains with empty class data
+            domainClasses = {};
+            localStorage.setItem("domainClasses", "{}");
+          }
+
+          renderDynamicUI();
+          await loadAndProcessContent();
+          showToast("Domain loaded!");
         });
 
         window.addEventListener("beforeunload", () => {
