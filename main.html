@@ -15,6 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="customStyle.css" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 
     <style>
@@ -83,7 +84,7 @@
       #autocomplete-input {
         width: 350px;
         padding: 5px 15px;
-        border: 2px solid #cecece;
+        border: 2px solid #cecece65;
         border-radius: 20px;
         transition: all 0.3s ease;
         backdrop-filter: blur(10px);
@@ -503,7 +504,7 @@
           domainInput.value = domain;
 
           // Update document title
-          let title = domain.replace(/^https?:\/\//, "");
+          let title = domain.replace(/^https?:\/\/(www\.)?/, "");
           title = title.replace(/\.\w+$/, "");
           document.title = title.charAt(0).toUpperCase() + title.slice(1);
         }
@@ -598,7 +599,7 @@
 
           let newDomainUrl = newDomainValue;
           if (!newDomainUrl.startsWith("http")) {
-            newDomainUrl = "https://" + newDomainUrl;
+            newDomainUrl = "https://www." + newDomainUrl;
           }
 
           domain = newDomainUrl;
