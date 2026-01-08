@@ -52,9 +52,10 @@
         position: sticky;
         top: 0;
         z-index: 1000;
-        backdrop-filter: blur(5px);
-        background: var(--glass-bg);
-        box-shadow: var(--shadow-lg);
+        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.85);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         font-size: 13px;
       }
 
@@ -84,20 +85,22 @@
       #autocomplete-input {
         width: 350px;
         padding: 5px 15px;
-        border: 2px solid #cecece65;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(0, 0, 0, 0.12);
         border-radius: 20px;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
+        transition: all 0.2s ease;
+        color: #1a1a1a;
       }
 
       #autocomplete-input:focus {
         outline: none;
-        border-color: #348c40;
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        border-color: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
+        background: rgba(255, 255, 255, 1);
       }
 
       #autocomplete-input::placeholder {
-        color: var(--text-muted);
+        color: rgba(0, 0, 0, 0.4);
       }
 
       /* Modern Buttons */
@@ -105,10 +108,10 @@
         position: relative;
         padding: 0.75rem 1.5rem;
         border-radius: 20px;
-        font-weight: 600;
+        font-weight: 500;
         border: none;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         text-decoration: none;
         display: inline-flex;
         align-items: center;
@@ -118,24 +121,13 @@
       }
 
       .btns::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #2c0349a1, #861b697c);
-        transition: left 0.5s ease;
-      }
-
-      .btns:hover::before {
-        left: 100%;
+        display: none;
       }
 
       .btns-primary {
-        background: linear-gradient(135deg, #2c0349a1, #861b697c);
+        background: #1a1a1a;
         color: white;
-        box-shadow: var(--shadow-xl);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
 
       a.btns-primary {
@@ -143,8 +135,9 @@
       }
 
       .btns-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+        background: #2a2a2a;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
       }
 
       .btns-secondary {
@@ -169,11 +162,12 @@
 
       .class-pill {
         padding: 0.5rem 1rem;
-        background: rgba(147, 147, 147, 0.48);
+        background: rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 20px;
-        color: white;
+        color: #1a1a1a;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         position: relative;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -181,26 +175,13 @@
       }
 
       .class-pill::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, #10b981, #348c40);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        border-radius: inherit;
+        display: none;
       }
 
       .class-pill:hover {
+        background: rgba(0, 0, 0, 0.1);
+        border-color: rgba(0, 0, 0, 0.15);
         transform: translateY(-1px);
-        border-color: #10b981;
-        color: white;
-      }
-
-      .class-pill:hover::before {
-        opacity: 1;
       }
 
       .class-pill span {
@@ -264,14 +245,15 @@
       /* Autocomplete Dropdown Styles */
       .ui-menu {
         z-index: 9999;
-        background: var(--surface-color);
-        border: 2px solid var(--border-color);
-        border-radius: 12px;
-        box-shadow: var(--shadow-lg);
+        background: rgba(255, 255, 255, 0.98);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         backdrop-filter: blur(20px);
         max-height: 300px;
         overflow-y: auto;
         margin-top: 0.5rem;
+        padding: 0.25rem;
       }
 
       .ui-menu-item {
@@ -280,18 +262,19 @@
 
       .ui-menu-item .ui-menu-item-wrapper {
         padding: 0.75rem 1rem;
-        color: var(--text-secondary);
+        color: #1a1a1a;
         border: none;
         cursor: pointer;
-        border-radius: 8px;
-        margin: 0.25rem;
+        border-radius: 20px;
+        margin: 0.125rem;
+        transition: all 0.2s ease;
       }
 
       .ui-menu-item .ui-menu-item-wrapper:hover,
       .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
-        background: linear-gradient(135deg, #10b981, #348c40);
-        color: white;
-        margin: 0.25rem;
+        background: rgba(0, 0, 0, 0.05);
+        color: #1a1a1a;
+        margin: 0.125rem;
       }
 
       /* Responsive Design */
@@ -323,14 +306,14 @@
       /* Toast Notification */
       .toast {
         position: fixed;
-        bottom: 2rem;
+        top: 7rem;
         right: 2rem;
         background: #10b981;
         color: white;
         padding: 1rem 1.5rem;
         border-radius: 12px;
         box-shadow: var(--shadow-lg);
-        transform: translateY(100px);
+        transform: translateY(-100px);
         opacity: 0;
         transition: all 0.3s ease;
         z-index: 10000;
