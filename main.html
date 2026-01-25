@@ -16,6 +16,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="customStyle.css" />
+    <link id="domain-stylesheet" rel="stylesheet" href="" />
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 
     <style>
@@ -53,7 +54,7 @@
         top: 0;
         z-index: 1000;
         backdrop-filter: blur(20px);
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.485);
         border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         font-size: 13px;
@@ -162,7 +163,7 @@
 
       .class-pill {
         padding: 0.5rem 1rem;
-        background: rgba(0, 0, 0, 0.06);
+        background: rgba(255, 255, 255, 0.608);
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 20px;
         color: #1a1a1a;
@@ -179,7 +180,7 @@
       }
 
       .class-pill:hover {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.776);
         border-color: rgba(0, 0, 0, 0.15);
         transform: translateY(-1px);
       }
@@ -245,15 +246,15 @@
       /* Autocomplete Dropdown Styles */
       .ui-menu {
         z-index: 9999;
-        background: rgba(255, 255, 255, 0.98);
+        background: rgba(255, 255, 255, 0.531);
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 20px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         backdrop-filter: blur(20px);
         max-height: 300px;
         overflow-y: auto;
-        margin-top: 0.5rem;
         padding: 0.25rem;
+        max-width: 350px;
       }
 
       .ui-menu-item {
@@ -484,6 +485,13 @@
 
           document.getElementById("styles-link").href =
             domain + "/inc/style.css";
+          
+          // Update domain stylesheet
+          const domainStylesheet = document.getElementById("domain-stylesheet");
+          if (domainStylesheet) {
+            domainStylesheet.href = domain + "/styles.css";
+          }
+          
           domainInput.value = domain;
 
           // Update document title
